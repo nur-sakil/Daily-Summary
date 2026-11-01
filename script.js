@@ -65,18 +65,29 @@ $(document).on('click', ".equal", function () {
 });
 
 function calculateTotal() {
-  let atotal = 0;
-  let mtotal = 0;
-  $('.price').each(function () {
+   let atotal = 0;
+   let mtotal = 0;
+  $('.price').each(function(){
     let idname = this.getAttribute('id');
-    if (idname == "priceadd" && !isNaN(parseFloat($(this).val()))) {
-      atotal += parseFloat($(this).val());
-    } else if (idname == "priceminus" && !isNaN(parseFloat($(this).val()))) {
-      mtotal += parseFloat($(this).val());
+    if(idname == "priceadd" && !isNaN(parseFloat($(this).val()))){
+      atotal +=  parseFloat($(this).val());
+    }else if(idname == "priceminus" && !isNaN(parseFloat($(this).val()))){ 
+      mtotal +=  parseFloat($(this).val());
     }
   });
-  total = atotal - mtotal;
-  document.getElementById("total").innerHTML = total;
+  
+  total = atotal - mtotal; 
+
+  // Determine text based on whether total is positive or negative
+  let labelText = "";
+  if (total > 0) {
+      labelText = " কম"; // More (Positive)
+  } else if (total < 0) {
+      labelText = " বেশি";  // Less (Negative)
+  }
+
+  // Display the total number along with the corresponding Bangla word
+  document.getElementById("total").innerHTML = total + labelText;
 }
 
 // --- LOCAL STORAGE FUNCTIONS ---
